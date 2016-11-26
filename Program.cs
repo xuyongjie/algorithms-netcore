@@ -1,5 +1,5 @@
 ﻿using System;
-using Algorithmsnetcore.LeetCode;
+using Algorithmsnetcore.LinkList;
 
 namespace ConsoleApplication
 {
@@ -7,8 +7,6 @@ namespace ConsoleApplication
     {
         public static void Main(string[] args)
         {
-            LeetCode1 lt1=new LeetCode1();
-            Console.WriteLine("Hello World!");
         }
     }
 }
