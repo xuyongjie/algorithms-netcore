@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 namespace Algorithmsnetcore.LeetCode
 {
+    //算符优先分析法
+    //支持计算+、-、*、／
     class LeetCode227
     {
         private Stack<char> op;//操作符栈

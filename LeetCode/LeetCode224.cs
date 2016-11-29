@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 namespace Algorithmsnetcore.LeetCode
 {
+    //算符优先分析法
+    //支持计算+、-、（、）
     class LeetCode224
     {
         private Stack<char> op;//操作符栈
@@ -43,41 +45,43 @@ namespace Algorithmsnetcore.LeetCode
                         }
                         else
                         {
-                            char op1 = op.Peek();
-                            char relation = Compare(op1, c);
-                            switch (relation)
+                            while (true)
                             {
-                                case 'e':
-                                    Console.WriteLine("expression error");
-                                    break;
-                                case '>':
-                                    op1 = op.Pop();
-                                    if (optor.Count >= 2)
-                                    {
-                                        int num1 = optor.Pop();
-                                        int num2 = optor.Pop();
-                                        switch (op1)
+                                char op1 = op.Peek();
+                                char relation = Compare(op1, c);
+                                switch (relation)
+                                {
+                                    case 'e':
+                                        Console.WriteLine("expression error");
+                                        break;
+                                    case '>':
+                                        op1 = op.Pop();
+                                        if (optor.Count >= 2)
                                         {
-                                            case '+':
-                                                optor.Push(num1 + num2);
-                                                break;
-                                            case '-':
-                                                optor.Push(num2 - num1);
-                                                break;
+                                            int num1 = optor.Pop();
+                                            int num2 = optor.Pop();
+                                            switch (op1)
+                                            {
+                                                case '+':
+                                                    optor.Push(num1 + num2);
+                                                    break;
+                                                case '-':
+                                                    optor.Push(num2 - num1);
+                                                    break;
+                                            }
+                                            continue;
                                         }
-                                    }
-                                    break;
-                                case '<':
-
-                                    break;
-                            }
-                            if (c == ')')
-                            {
-                                op.Pop();
-                            }
-                            else
-                            {
-                                op.Push(c);
+                                        break;
+                                }
+                                if (c == ')')
+                                {
+                                    op.Pop();
+                                }
+                                else
+                                {
+                                    op.Push(c);
+                                }
+                                break;
                             }
                         }
                     }
