@@ -6,9 +6,9 @@ namespace Algorithmsnetcore.LinkList
         public LinkNode Next{get;set;}
     }
 
-    class NodeList{
+    class LinkList{
         private LinkNode head;
-        public NodeList(LinkNode head)
+        public LinkList(LinkNode head)
         {
             this.head=head;
         }
@@ -31,6 +31,28 @@ namespace Algorithmsnetcore.LinkList
             }
             head.Next=null;
             head=p;
+        }
+
+        public void ReverseRecursive()
+        {
+            if(head==null||head.Next==null)
+            {
+                return;
+            }
+            DoReverseRecursive(head);
+        }
+
+        private void DoReverseRecursive(LinkNode p)
+        {
+            if(p.Next==null)
+            {
+                head.Next=null;
+                head=p;
+                return;
+            }
+            LinkNode t=p.Next;
+            DoReverseRecursive(t);
+            t.Next=p;
         }
         public void Print()
         {

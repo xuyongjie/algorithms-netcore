@@ -123,7 +123,7 @@ namespace Algorithmsnetcore
 
 
         // # + - ( )
-        //返回> < = 或者  e代表表达式异常
+        //返回> < 或者  e代表表达式异常
         private char Compare(char op1, char op2)
         {
             if (op1 == '"' && op2 == '"')
