@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Algorithmsnetcore.LeetCode
 {
-    class LeetCode224
+    class LeetCode227
     {
         private Stack<char> op;//操作符栈
         private Stack<int> optor;//操作数栈
@@ -43,41 +43,42 @@ namespace Algorithmsnetcore.LeetCode
                         }
                         else
                         {
-                            char op1 = op.Peek();
-                            char relation = Compare(op1, c);
-                            switch (relation)
+                            while (true)
                             {
-                                case 'e':
-                                    Console.WriteLine("expression error");
-                                    break;
-                                case '>':
-                                    op1 = op.Pop();
-                                    if (optor.Count >= 2)
-                                    {
-                                        int num1 = optor.Pop();
-                                        int num2 = optor.Pop();
-                                        switch (op1)
+                                char op1 = op.Peek();
+                                char relation = Compare(op1, c);
+                                switch (relation)
+                                {
+                                    case 'e':
+                                        // Console.WriteLine("expression error");
+                                        break;
+                                    case '>':
+                                        op1 = op.Pop();
+                                        if (optor.Count >= 2)
                                         {
-                                            case '+':
-                                                optor.Push(num1 + num2);
-                                                break;
-                                            case '-':
-                                                optor.Push(num2 - num1);
-                                                break;
+                                            int num1 = optor.Pop();
+                                            int num2 = optor.Pop();
+                                            switch (op1)
+                                            {
+                                                case '+':
+                                                    optor.Push(num1 + num2);
+                                                    break;
+                                                case '-':
+                                                    optor.Push(num2 - num1);
+                                                    break;
+                                                case '*':
+                                                    optor.Push(num2 * num1);
+                                                    break;
+                                                case '/':
+                                                    optor.Push(num2 / num1);
+                                                    break;
+                                            }
+                                            continue;
                                         }
-                                    }
-                                    break;
-                                case '<':
-
-                                    break;
-                            }
-                            if (c == ')')
-                            {
-                                op.Pop();
-                            }
-                            else
-                            {
+                                        break;
+                                }
                                 op.Push(c);
+                                break;
                             }
                         }
                     }
@@ -104,7 +105,7 @@ namespace Algorithmsnetcore.LeetCode
 
         private bool IsOp(char c)
         {
-            if (c == '"' || c == '+' || c == '-' || c == '(' || c == ')')
+            if (c == '"' || c == '+' || c == '-' || c == '*' || c == '/')
             {
                 return true;
             }
@@ -112,8 +113,8 @@ namespace Algorithmsnetcore.LeetCode
         }
 
 
-        // # + - ( )
-        //返回> < = 或者  e代表表达式异常
+        // " + - * / 
+        //返回> <或者  e代表表达式异常
         private char Compare(char op1, char op2)
         {
             if (op1 == '"' && op2 == '"')
@@ -128,13 +129,13 @@ namespace Algorithmsnetcore.LeetCode
             {
                 return '<';
             }
-            else if (op1 == '"' && op2 == '(')
+            else if (op1 == '"' && op2 == '*')
             {
                 return '<';
             }
-            else if (op1 == '"' && op2 == ')')
+            else if (op1 == '"' && op2 == '/')
             {
-                return 'e';
+                return '<';
             }
             else if (op1 == '+' && op2 == '"')
             {
@@ -148,13 +149,13 @@ namespace Algorithmsnetcore.LeetCode
             {
                 return '>';
             }
-            else if (op1 == '+' && op2 == '(')
+            else if (op1 == '+' && op2 == '*')
             {
                 return '<';
             }
-            else if (op1 == '+' && op2 == ')')
+            else if (op1 == '+' && op2 == '/')
             {
-                return '>';
+                return '<';
             }
             else if (op1 == '-' && op2 == '"')
             {
@@ -171,60 +172,60 @@ namespace Algorithmsnetcore.LeetCode
                 return '>';
 
             }
-            else if (op1 == '-' && op2 == '(')
+            else if (op1 == '-' && op2 == '*')
             {
                 return '<';
 
             }
-            else if (op1 == '-' && op2 == ')')
+            else if (op1 == '-' && op2 == '/')
+            {
+                return '<';
+
+            }
+            else if (op1 == '*' && op2 == '"')
             {
                 return '>';
 
             }
-            else if (op1 == '(' && op2 == '"')
-            {
-                return 'e';
-
-            }
-            else if (op1 == '(' && op2 == '+')
-            {
-                return '<';
-
-            }
-            else if (op1 == '(' && op2 == '-')
-            {
-                return '<';
-
-            }
-            else if (op1 == '(' && op2 == '(')
-            {
-                return '<';
-            }
-            else if (op1 == '(' && op2 == ')')
-            {
-                return '<';
-            }
-            else if (op1 == ')' && op2 == '"')
+            else if (op1 == '*' && op2 == '+')
             {
                 return '>';
 
             }
-            else if (op1 == ')' && op2 == '+')
+            else if (op1 == '*' && op2 == '-')
             {
                 return '>';
 
             }
-            else if (op1 == ')' && op2 == '-')
+            else if (op1 == '*' && op2 == '*')
+            {
+                return '>';
+            }
+            else if (op1 == '*' && op2 == '/')
+            {
+                return '>';
+            }
+            else if (op1 == '/' && op2 == '"')
             {
                 return '>';
 
             }
-            else if (op1 == ')' && op2 == '(')
+            else if (op1 == '/' && op2 == '+')
             {
-                return 'e';
+                return '>';
 
             }
-            else if (op1 == ')' && op2 == ')')
+            else if (op1 == '/' && op2 == '-')
+            {
+                return '>';
+
+            }
+            else if (op1 == '/' && op2 == '*')
+            {
+                return '>';
+
+            }
+            else if (op1 == '/' && op2 == '/')
             {
                 return '>';
             }
