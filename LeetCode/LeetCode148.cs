@@ -1,7 +1,9 @@
-using System;
-
 namespace Algorithmsnetcore.LeetCode
 {
+    /*
+    Sort a linked list in O(n log n) time using constant space complexity.
+    */
+
     /**
      * Definition for singly-linked list.
      * public class ListNode {
@@ -10,8 +12,8 @@ namespace Algorithmsnetcore.LeetCode
      *     public ListNode(int x) { val = x; }
      * }
      */
-     //用快慢指针将链表分成左右两份，然后分别排序
-     //也就是归并排序
+    //用快慢指针将链表分成左右两份，然后分别排序
+    //也就是归并排序
     public class LeetCode148
     {
         public ListNode SortList(ListNode head)
