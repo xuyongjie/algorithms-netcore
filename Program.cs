@@ -1,6 +1,4 @@
 ﻿using System;
-using Algorithmsnetcore;
-using Algorithmsnetcore.LeetCode;
 using Algorithmsnetcore.LinkList;
 
 namespace ConsoleApplication
