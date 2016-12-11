@@ -44,6 +44,8 @@ namespace ConsoleApplication
             // Console.WriteLine(cal.Calculate("1+2*(5-2)+8/4-3+2*4+1+2"));
             // LeetCode402 lt402=new LeetCode402();
             // Console.WriteLine(lt402.RemoveKdigits("1432219",3));
+            LeetCode215 lt215=new LeetCode215();
+            Console.WriteLine(lt215.FindKthLargest(new int[]{2,1},2));
         }
     }
 }
