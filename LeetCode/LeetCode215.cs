@@ -55,18 +55,5 @@ namespace Algorithmsnetcore.LeetCode
                 }
             }
         }
-
-        void BuildHeap(int[] nums)
-        {
-            for (int i = nums.Length/2-1; i>=0; i--)
-            {
-                while(true)
-                {
-                    int left=nums[i*2+1];
-                    int right=nums[i*2+2];
-                    
-                }
-            }
-        }
     }
 }
